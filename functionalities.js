@@ -54,3 +54,20 @@ document.getElementById("clear-history").addEventListener("click", function () {
     getElement("coin-count").innerText = 100;
 });
 
+// Copy button functionality
+const copyButtons = document.getElementsByClassName("border-2");
+for (let copyButton of copyButtons) {
+    copyButton.addEventListener("click", function () {
+        const serviceNumber = copyButton.parentNode.parentNode.children[1].children[2].innerText;
+        navigator.clipboard.writeText(serviceNumber)
+            .then(() => {
+                alert(`Copied: ${serviceNumber}`);
+                const copyCount=getElement("copy-count");
+                copyCount.innerText=parseInt(copyCount.innerText)+1;
+            })
+            .catch(err => {
+                alert("Failed to copy: " + err);
+            });
+    });
+}
+
